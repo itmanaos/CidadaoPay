@@ -1,0 +1,122 @@
+openapi: 3.0.3
+info:
+  title: CIDADÃO$ Super App Municipal API
+  description: Plataforma Inteligente de Transformação Digital, Bioeconomia e Governança Integrada para Municípios Amazônicos (Manacapuru / AM).
+  version: 1.0.0
+servers:
+  - url: https://api.cidadao.manacapuru.am.gov.br/v1
+    description: Servidor de Produção Municipal
+  - url: https://ais-dev-gbkaowwv6momxnpjqyge7x-64472806825.us-east1.run.app/api
+    description: Ambiente de Desenvolvimento / Sandbox
+
+paths:
+  /auth/login:
+    post:
+      summary: Autenticação de Cidadão ou Operador
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                cpfOrEmail:
+                  type: string
+                password:
+                  type: string
+      responses:
+        '200':
+          description: Token JWT e perfil do usuário autenticado.
+
+  /citizen/identity/{mpuid}:
+    get:
+      summary: Consulta de Identidade Digital MPUID com nível de verificação
+      parameters:
+        - name: mpuid
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Dados cadastrais, foto e QR code de autenticidade.
+
+  /marketplace/products:
+    get:
+      summary: Catálogo de produtos do comércio de Manacapuru
+      parameters:
+        - name: category
+          in: query
+          schema:
+            type: string
+        - name: search
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Lista de produtos com estoque e preços.
+
+  /marketplace/orders:
+    post:
+      summary: Criação de pedido no marketplace com cálculo de comissão da plataforma
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                items:
+                  type: array
+                deliveryAddress:
+                  type: string
+                freightModal:
+                  type: string
+                paymentMethod:
+                  type: string
+      responses:
+        '201':
+          description: Pedido criado com código de rastreamento.
+
+  /freight/quotes:
+    post:
+      summary: Cotação dinâmica de frete fluvial ou rodoviário no Rio Solimões
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                origin:
+                  type: string
+                destination:
+                  type: string
+                weightKg:
+                  type: number
+                modalType:
+                  type: string
+      responses:
+        '200':
+          description: Valor estimado do frete e transportadores disponíveis.
+
+  /public-services/protocols:
+    post:
+      summary: Abertura de protocolo de serviço público municipal
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                serviceCode:
+                  type: string
+                description:
+                  type: string
+                location:
+                  type: string
+      responses:
+        '201':
+          description: Protocolo gerado com SLA de atendimento.

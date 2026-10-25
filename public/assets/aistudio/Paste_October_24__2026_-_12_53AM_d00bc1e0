@@ -1,0 +1,1556 @@
+# PROMPT MESTRE — DESENVOLVIMENTO DO CIDADÃO$ SUPER APP MOBILE
+**Versão:** 1.0 — Outubro de 2026  
+**Tecnologia principal:** React Native + Expo + TypeScript  
+**Destino:** Google AI Studio / Google Antigravity  
+**Projeto:** CIDADÃO$ — Plataforma Inteligente de Transformação Digital, Bioeconomia e Governança Integrada para Municípios Amazônicos
+
+---
+
+# 1. PAPEL DO AGENTE DESENVOLVEDOR
+
+Atue como uma equipe sênior multidisciplinar, composta por:
+
+- Arquiteto de software especializado em Super Apps e sistemas SaaS multi-tenant;
+- Engenheiro React Native e Expo;
+- Desenvolvedor backend e arquiteto de APIs;
+- Especialista em UX/UI e Design Systems;
+- Especialista em segurança, identidade digital e LGPD;
+- Especialista em GovTech e serviços públicos municipais;
+- Especialista em marketplaces, e-commerce e logística;
+- Especialista em pagamentos, carteiras digitais e conciliação financeira;
+- Especialista em sistemas geoespaciais e inteligência territorial;
+- Especialista em aplicações offline-first e conectividade amazônica;
+- Engenheiro de qualidade, testes automatizados e DevOps;
+- Gerente técnico de projetos de PD&I.
+
+Sua missão é projetar, implementar, integrar, testar e documentar um aplicativo mobile completo denominado **CIDADÃO$**, destinado inicialmente aos municípios amazônicos, com capacidade de expansão para todo o território nacional.
+
+**INSTRUÇÃO FUNDAMENTAL:** Não produzir apenas protótipos estáticos, telas desconectadas ou simulações de funcionalidades. Implementar código funcional, navegação real, formulários, validações, persistência, fluxos transacionais, contratos de APIs, tratamento de erros e infraestrutura de testes.
+
+Quando serviços externos exigirem credenciais, certificações, autorização institucional ou contratos, construir adaptadores, ambientes sandbox e fluxos de demonstração explicitamente identificados, sem apresentar transações fictícias como operações reais.
+
+# 2. VISÃO E OBJETIVOS DO PRODUTO
+
+O CIDADÃO$ será um Super App municipal que conecta cidadãos, famílias, empresas, produtores rurais, comunidades ribeirinhas, profissionais autônomos, restaurantes, transportadores, instituições públicas e parceiros comerciais em um ecossistema digital integrado.
+
+A solução deve combinar quatro dimensões:
+
+1. **Governo Digital:** identidade do cidadão, atendimento público, educação, saúde, benefícios e serviços municipais.
+2. **Economia Digital:** Marketplace, FoodPlace, serviços profissionais, publicidade, comercialização agro e turismo.
+3. **Mobilidade e Serviços Financeiros:** passagens, fretes, carteira digital MRT$, pagamentos, recompensas e benefícios.
+4. **Inteligência e Governança:** integração de dados, BI, geointeligência, indicadores territoriais e apoio à decisão.
+
+O município de Manacapuru/AM será o território de referência dos dados demonstrativos e do piloto conceitual.
+
+A solução precisa contemplar bairros urbanos, comunidades rurais, localidades ribeirinhas, travessias fluviais, dificuldades de conectividade e rotas multimodais.
+
+# 3. STACK TECNOLÓGICA OBRIGATÓRIA
+
+## 3.1 Aplicativo Mobile
+
+Utilizar:
+
+- React Native com Expo SDK 58 ou versão estável compatível mais atual, após validação;
+- TypeScript com configuração strict;
+- Expo Router para navegação baseada em arquivos;
+- React Query / TanStack Query para dados remotos;
+- Zustand para estado global de interface;
+- React Hook Form e Zod para formulários e validações;
+- Expo SecureStore para armazenamento de credenciais sensíveis apropriadas;
+- Expo SQLite para persistência offline;
+- Expo Notifications;
+- Expo Location;
+- Expo Camera;
+- Expo ImagePicker;
+- Expo FileSystem;
+- Expo Linking;
+- Expo EAS Build e Development Builds;
+- Biblioteca de mapas compatível com a versão do Expo;
+- Biblioteca de gráficos compatível com React Native;
+- Biblioteca de componentes baseada em NativeWind ou alternativa equivalente comprovadamente compatível.
+
+Não misturar padrões incompatíveis de navegação ou gerenciamento de estado.
+
+Validar a compatibilidade exata das dependências antes de instalar.
+
+## 3.2 Backend e banco de dados
+
+Arquitetura preferencial:
+
+- Node.js com NestJS;
+- TypeScript;
+- PostgreSQL;
+- PostGIS para geointeligência;
+- Prisma ORM ou alternativa compatível;
+- Redis para cache, sessões auxiliares e filas;
+- Armazenamento de objetos compatível com S3;
+- APIs REST versionadas;
+- OpenAPI/Swagger;
+- WebSockets ou eventos para atualizações operacionais;
+- Workers para filas, notificações e processamento assíncrono;
+- Serviços isolados por domínio de negócio.
+
+Utilizar um monólito modular no MVP, preservando fronteiras para eventual extração de serviços.
+
+## 3.3 Desenvolvimento e infraestrutura
+
+Implementar:
+
+- Monorepo com pnpm workspaces;
+- ESLint e Prettier;
+- TypeScript strict;
+- Docker Compose para infraestrutura local;
+- Migrations versionadas;
+- Seeds de demonstração;
+- GitHub Actions ou CI equivalente;
+- Testes unitários e de integração;
+- Testes E2E mobile;
+- Instrumentação de logs e observabilidade;
+- Variáveis de ambiente por aplicação;
+- Configuração de staging e produção;
+- Documentação de build Android/iOS;
+- EAS Build.
+
+Evitar chaves, senhas, tokens ou credenciais reais dentro do código-fonte.
+
+# 4. ARQUITETURA MULTI-TENANT
+
+O CIDADÃO$ deverá ser uma plataforma SaaS capaz de atender vários municípios e empresas.
+
+Implementar as entidades:
+
+- Tenant;
+- Município;
+- Unidade Administrativa;
+- Organização;
+- Usuário;
+- Perfil;
+- Papel;
+- Permissão;
+- Assinatura;
+- Configuração do Tenant;
+- Tema Visual Municipal;
+- Plano Comercial;
+- Auditoria;
+- Feature Flag.
+
+Requisitos obrigatórios:
+
+1. Todos os registros críticos de domínio municipal deverão pertencer a um tenant.
+2. A resolução do tenant será executada no backend, a partir de contexto autenticado e validado.
+3. Toda consulta e mutação deverá aplicar controle de acesso e isolamento do tenant.
+4. Sempre que adequado, implementar Row Level Security como defesa adicional.
+5. Um cidadão poderá possuir vínculos autorizados com diferentes municípios.
+6. Dados sensíveis de um tenant não podem ser acessados por outro.
+7. Operações administrativas globais deverão ter regras e auditoria específicas.
+8. O cidadão terá acesso apenas às informações compatíveis com sua identidade e permissões.
+9. A interface deverá apresentar nome, marca e configurações do município selecionado.
+
+Separar os contextos de administração pública e exploração comercial, impedindo que a empresa operadora utilize livremente dados pessoais municipais para publicidade ou finalidades comerciais.
+
+# 5. IDENTIDADE VISUAL E DESIGN SYSTEM
+
+Criar um Design System exclusivo denominado:
+
+**CIDADÃO$ DESIGN SYSTEM**
+
+Inspirar-se nos layouts conceituais do projeto.
+
+Características:
+
+- Estética premium, tecnológica, moderna e humanizada;
+- Referências à Amazônia e às comunidades ribeirinhas;
+- Interfaces claras e organizadas;
+- Cartões arredondados;
+- Ícones coloridos por módulo;
+- Tipografia de alta legibilidade;
+- Dashboards modernos;
+- Fotografias contextualizadas;
+- Mapas e visualização geoespacial;
+- Suporte a dispositivos de diferentes dimensões;
+- Temas claro e escuro;
+- Acessibilidade.
+
+Paleta inicial sugerida:
+
+| Elemento | Cor |
+|---|---|
+| Verde principal | #009B4D |
+| Verde escuro | #006B3C |
+| Azul institucional | #0756A6 |
+| Azul profundo | #072F58 |
+| Laranja | #FF8A00 |
+| Amarelo | #FFC43D |
+| Branco | #FFFFFF |
+| Cinza de fundo | #F3F6FA |
+| Texto principal | #163047 |
+
+As cores serão tokens configuráveis, não valores espalhados pelos componentes.
+
+Criar componentes reutilizáveis:
+
+- AppHeader;
+- MunicipalHeader;
+- ModuleHeader;
+- BottomNavigation;
+- SearchBar;
+- CategoryGrid;
+- ServiceCard;
+- ProductCard;
+- RestaurantCard;
+- ProfessionalCard;
+- TicketCard;
+- FreightCard;
+- WalletCard;
+- RewardCard;
+- MetricCard;
+- StatusBadge;
+- Timeline;
+- InteractiveMap;
+- EmptyState;
+- ErrorState;
+- LoadingSkeleton;
+- OfflineBanner;
+- NotificationCenter;
+- PaymentSelector;
+- ConfirmationSheet;
+- FilterSheet;
+- UserAvatar;
+- SectionHeader;
+- FloatingActionButton.
+
+**As ilustrações e mockups existentes são referências conceituais. Não incorporar imagens de slides como telas de interface. Reconstruir todas as telas em componentes nativos editáveis e funcionais.**
+
+# 6. NAVEGAÇÃO PRINCIPAL
+
+Implementar uma navegação por abas com cinco entradas:
+
+1. Início;
+2. Explorar;
+3. Serviços;
+4. Carteira;
+5. Perfil.
+
+## Tela Início
+
+Deve conter:
+
+- Identidade CIDADÃO$;
+- Município ativo;
+- Localização autorizada do usuário;
+- Saudação personalizada;
+- Busca global;
+- Notificações;
+- Banner de campanhas;
+- Acesso aos 15 módulos;
+- Serviços mais utilizados;
+- Produtos em destaque;
+- Restaurantes próximos;
+- Solicitações em andamento;
+- Passagens e viagens;
+- Promoções e recompensas;
+- Notícias e alertas municipais;
+- Indicadores contextuais permitidos;
+- Atalhos personalizáveis.
+
+A ordenação e disponibilidade dos módulos deverão ser configuráveis por município, perfil e feature flag.
+
+# 7. IMPLEMENTAÇÃO DOS 15 MÓDULOS
+
+## MÓDULO 01 — CADASTRO E IDENTIDADE DO CIDADÃO
+
+Identificador funcional: `citizen-identity`
+
+Objetivo: criar o cadastro único e a identidade digital municipal MPUID.
+
+### Funcionalidades
+
+- Cadastro de usuário;
+- Login e recuperação de acesso;
+- Confirmação de e-mail ou telefone;
+- Cadastro de CPF e dados pessoais;
+- Perfil do cidadão;
+- Foto de perfil;
+- Endereço e geolocalização;
+- Classificação urbana, rural ou ribeirinha;
+- Cadastro de familiares;
+- Relacionamento entre responsáveis e dependentes;
+- Dados socioeconômicos autorizados;
+- Dados educacionais e profissionais;
+- Currículo digital;
+- Upload de documentos;
+- Verificação documental por serviço autorizado;
+- Níveis de verificação;
+- Identidade digital municipal com QR Code de verificação;
+- Histórico de utilização de serviços;
+- Gestão de consentimentos e privacidade;
+- Solicitação de acesso, retificação e eliminação, conforme hipótese legal aplicável;
+- Configuração de preferências;
+- Exportação de dados pessoais permitidos.
+
+### Telas obrigatórias
+
+1. Tela inicial / autenticação;
+2. Cadastro único;
+3. Verificação de identidade;
+4. Meu Perfil;
+5. Identidade Digital;
+6. Histórico de Serviços;
+7. Rede Familiar;
+8. Dados Profissionais;
+9. Privacidade e Consentimentos.
+
+O MPUID será identificador interno municipal. Não apresentar o cartão do app como documento civil oficial sem fundamento legal e integração formal.
+
+## MÓDULO 02 — ATENDIMENTO E SERVIÇOS PÚBLICOS
+
+Identificador: `public-services`
+
+### Funcionalidades
+
+- Catálogo de serviços municipais;
+- Consulta de requisitos;
+- Solicitação de serviços;
+- Abertura de protocolo;
+- Anexação de documentos;
+- Agendamento presencial;
+- Emissão de documentos municipais autorizados;
+- Consulta de tributos e taxas;
+- Integração com arrecadação;
+- Solicitações de infraestrutura;
+- Iluminação pública;
+- Limpeza urbana;
+- Meio ambiente;
+- Assistência social;
+- Ouvidoria;
+- Reclamações;
+- Sugestões;
+- Acompanhamento de solicitações;
+- Notificações e prazos;
+- Histórico de atendimentos;
+- Avaliação do serviço;
+- Painel de atendimento municipal;
+- Gestão de filas e SLAs.
+
+### Telas
+
+1. Catálogo de serviços;
+2. Busca por categoria;
+3. Detalhamento do serviço;
+4. Formulário da solicitação;
+5. Acompanhamento do protocolo;
+6. Agenda;
+7. Notificações;
+8. Histórico;
+9. Avaliação do atendimento.
+
+## MÓDULO 03 — EDUCAÇÃO
+
+Identificador: `education`
+
+### Funcionalidades
+
+- Cadastro de escolas;
+- Cadastro de alunos;
+- Matrícula e rematrícula;
+- Transferências escolares;
+- Gestão de turmas;
+- Frequência;
+- Boletim escolar;
+- Histórico;
+- Calendário;
+- Agenda de provas;
+- Comunicação escola-família;
+- Comunicados;
+- Biblioteca digital;
+- Conteúdos educacionais;
+- EAD e cursos;
+- Merenda escolar;
+- Transporte escolar terrestre e fluvial;
+- Cadastro de veículos e embarcações;
+- Cadastro de rotas;
+- Controle de passageiros;
+- Controle de embarques, desembarques e presença;
+- Mapa operacional de rotas;
+- Gestão de responsáveis;
+- Painel da Secretaria Municipal de Educação;
+- Indicadores escolares.
+
+### Telas
+
+1. Home Educação;
+2. Perfil do Aluno;
+3. Matrícula;
+4. Boletim;
+5. Frequência;
+6. Calendário Escolar;
+7. Biblioteca Digital;
+8. Merenda;
+9. Transporte Escolar;
+10. Rotas terrestres e fluviais;
+11. Comunicados;
+12. Painel da Escola.
+
+Contemplar sincronização offline para escolas e equipes de transporte em regiões com conectividade intermitente.
+
+## MÓDULO 04 — SAÚDE
+
+Identificador: `health`
+
+### Funcionalidades
+
+- Perfil do paciente;
+- Unidades de referência;
+- Agendamento de consultas;
+- Solicitação e consulta de exames;
+- Histórico de atendimentos autorizado;
+- Encaminhamentos;
+- Teleatendimento;
+- Carteira de vacinação;
+- Campanhas de saúde;
+- Informações de medicamentos;
+- Farmácia municipal;
+- Saúde materno-infantil;
+- Atenção primária;
+- Visitas domiciliares;
+- Equipes fluviais;
+- Busca de UBS;
+- Rotas para unidades de saúde;
+- Notificações;
+- Painel de gestão epidemiológica;
+- Indicadores agregados de saúde.
+
+### Telas
+
+1. Home Saúde;
+2. Meu Perfil de Saúde;
+3. Agendamento;
+4. Consultas;
+5. Exames;
+6. Vacinação;
+7. Medicamentos;
+8. Unidades e Rotas;
+9. Atendimento Remoto;
+10. Notificações.
+
+Dados clínicos devem permanecer segregados e protegidos com controles reforçados. Acesso profissional dependerá de autorização, finalidade e vínculo assistencial. Integrações com sistemas oficiais somente mediante credenciais, contratos e conformidade técnica.
+
+Não implementar diagnóstico médico automatizado nem prescrição por IA como funcionalidade clínica liberada.
+
+## MÓDULO 05 — MARKETPLACE / SHOPPING
+
+Identificador: `marketplace`
+
+### Funcionalidades
+
+- Cadastro de lojistas;
+- Loja virtual;
+- Catálogo de produtos;
+- Categorias e subcategorias;
+- Busca textual;
+- Filtros e ordenação;
+- Fotos de produtos;
+- Variantes e estoque;
+- Favoritos;
+- Avaliações;
+- Carrinho;
+- Cupons;
+- Checkout;
+- Cálculo de entrega;
+- Pagamento digital;
+- Gestão de pedidos;
+- Rastreamento;
+- Histórico de compras;
+- Reembolsos;
+- Atendimento ao consumidor;
+- Painel do lojista;
+- Relatórios de vendas;
+- Comissionamento da plataforma;
+- Assinaturas de lojistas.
+
+### Telas
+
+1. Home Marketplace;
+2. Categorias;
+3. Listagem de Produtos;
+4. Detalhe do Produto;
+5. Carrinho;
+6. Checkout;
+7. Meus Pedidos;
+8. Rastreamento;
+9. Loja do Vendedor;
+10. Painel Comercial.
+
+Integrar ao módulo de Fretes e à Carteira MRT$ por contratos de serviço.
+
+## MÓDULO 06 — FOODPLACE / FOODCOURT
+
+Identificador: `foodplace`
+
+### Funcionalidades
+
+- Cadastro de restaurantes;
+- Cadastro de cozinhas e food courts;
+- Perfil do restaurante;
+- Horário de funcionamento;
+- Cardápio digital;
+- Categorias de pratos;
+- Ingredientes e informações de alergênicos;
+- Adicionais e combos;
+- Cupons;
+- Carrinho;
+- Pedido para retirada;
+- Pedido para entrega;
+- Reserva de mesas;
+- Pagamentos;
+- Status do preparo;
+- Chamada de entregador;
+- Rastreamento;
+- Avaliações;
+- Gestão de cardápio;
+- Gestão de cozinha;
+- Painel do restaurante;
+- Gestão do FoodCourt;
+- Comissionamento;
+- Relatórios de vendas.
+
+### Telas
+
+1. Home FoodPlace;
+2. Restaurantes;
+3. Detalhe do Restaurante;
+4. Cardápio;
+5. Detalhe do Prato;
+6. Carrinho;
+7. Checkout;
+8. Acompanhar Pedido;
+9. Reservas;
+10. Painel do Restaurante.
+
+## MÓDULO 07 — FRETES E LOGÍSTICA
+
+Identificador: `freight`
+
+### Modalidades
+
+**Terrestre**
+
+- Frete de carga;
+- Frete de mudança;
+- Documentos e pequenos pacotes, modalidade courier de até 5 kg.
+
+Veículos: carro, pickup, moto com carretinha, bicicleta de carga, van, caminhão aberto e caminhão baú, conforme compatibilidade da operação.
+
+**Fluvial**
+
+- Lancha;
+- Barco;
+- Balsa.
+
+### Funcionalidades
+
+- Cadastro de transportadores;
+- Cadastro de veículos e embarcações;
+- Disponibilidade;
+- Solicitação de frete;
+- Origem e destino;
+- Pontos de coleta;
+- Dimensões e peso;
+- Descrição e fotos da carga;
+- Restrições de carga;
+- Cotação;
+- Comparação de ofertas;
+- Contratação;
+- Pagamento;
+- Coleta;
+- Entrega;
+- Rastreamento;
+- Comprovante de entrega;
+- Histórico;
+- Avaliações;
+- Ocorrências;
+- Painel do transportador;
+- Gestão de frota;
+- Gestão de rotas;
+- Indicadores operacionais.
+
+### Telas
+
+1. Home Fretes;
+2. Escolher Modalidade;
+3. Formulário de Pedido;
+4. Detalhes da Carga;
+5. Comparar Cotações;
+6. Contratação e Pagamento;
+7. Rastreamento;
+8. Comprovante de Entrega;
+9. Histórico;
+10. Painel do Transportador.
+
+Não prometer rastreamento GPS contínuo sem fonte real de localização. Implementar estados explícitos para rastreamento em tempo real, localização intermitente e última posição conhecida.
+
+## MÓDULO 08 — PASSAGENS E MOBILIDADE
+
+Identificador: `tickets-mobility`
+
+### Funcionalidades
+
+- Busca de viagens;
+- Origem e destino;
+- Datas;
+- Modalidade terrestre e fluvial;
+- Catálogo de operadores;
+- Rotas;
+- Horários;
+- Tarifas;
+- Disponibilidade;
+- Seleção de assentos;
+- Reserva;
+- Compra;
+- Pagamento;
+- Bilhete digital;
+- QR Code;
+- Verificação de embarque;
+- Histórico;
+- Cancelamento;
+- Regras de reembolso;
+- Notificações;
+- Informações de terminais;
+- Integração com turismo;
+- Painel do operador;
+- Gestão de viagens e embarcações.
+
+Criar suporte arquitetural para integrações futuras com modais adicionais, sem declarar venda de passagens aéreas habilitada caso não exista operador contratado.
+
+### Telas
+
+1. Home Passagens;
+2. Busca;
+3. Resultados;
+4. Detalhe da Viagem;
+5. Seleção de Assentos;
+6. Identificação do Passageiro;
+7. Pagamento;
+8. Bilhete Digital;
+9. Minhas Viagens;
+10. Painel do Operador.
+
+Evitar venda duplicada de assentos por meio de reserva temporária, expiração, controle concorrente e confirmação transacional no backend.
+
+## MÓDULO 09 — SERVIÇOS PROFISSIONAIS
+
+Identificador: `professional-services`
+
+### Categorias
+
+- Manutenção e reparos;
+- Construção civil;
+- Serviços domésticos;
+- Serviços automotivos;
+- Tecnologia e informática;
+- Consultoria;
+- Educação;
+- Beleza e estética;
+- Eventos;
+- Serviços rurais;
+- Outros serviços.
+
+### Funcionalidades
+
+- Cadastro profissional;
+- Verificação de perfil;
+- Portfólio;
+- Disponibilidade;
+- Busca por categoria;
+- Busca por proximidade;
+- Filtros;
+- Solicitação de orçamento;
+- Comparação de propostas;
+- Agenda;
+- Contratação;
+- Chat;
+- Pagamento;
+- Histórico;
+- Avaliações;
+- Reputação;
+- Mediação de ocorrências;
+- Painel do profissional;
+- Assinaturas profissionais.
+
+### Telas
+
+1. Home Serviços;
+2. Categorias;
+3. Lista de Profissionais;
+4. Perfil;
+5. Portfólio;
+6. Orçamento;
+7. Agenda;
+8. Contratação;
+9. Pagamento;
+10. Avaliações.
+
+Serviços de profissões regulamentadas exigirão comprovação de habilitação quando aplicável.
+
+## MÓDULO 10 — TURISMO E GUIA GASTRONÔMICO
+
+Identificador: `tourism-gastronomy`
+
+### Funcionalidades
+
+- Catálogo de destinos;
+- Atrativos turísticos;
+- Roteiros;
+- Turismo fluvial;
+- Turismo cultural;
+- Turismo comunitário;
+- Agenda de eventos;
+- Guias locais;
+- Hospedagens;
+- Reservas;
+- Passeios;
+- Mapa turístico;
+- Avaliações;
+- Fotografias e vídeos;
+- Catálogo de restaurantes;
+- Histórico dos restaurantes;
+- Cardápios;
+- Catálogo de ingredientes amazônicos;
+- Fichas técnicas de ingredientes;
+- Catálogo de pratos típicos;
+- Receitas;
+- Modo de preparo;
+- Vídeos de preparo;
+- Integração com FoodPlace;
+- Integração com Marketplace;
+- Integração com Passagens.
+
+### Telas
+
+1. Home Turismo;
+2. Mapa e Explorar;
+3. Destinos;
+4. Roteiros;
+5. Experiências;
+6. Detalhe do Atrativo;
+7. Restaurantes;
+8. Ingredientes Amazônicos;
+9. Pratos e Receitas;
+10. Reservas.
+
+## MÓDULO 11 — AGRO E BIOECONOMIA
+
+Identificador: `agro-bioeconomy`
+
+### Funcionalidades
+
+- Cadastro de produtores;
+- Cadastro de cooperativas;
+- Perfil produtivo;
+- Propriedades e áreas produtivas;
+- Catálogo de produtos;
+- Agricultura familiar;
+- Pesca e aquicultura;
+- Extrativismo;
+- Sociobiodiversidade;
+- Artesanato;
+- Calendário de produção;
+- Gestão de safra;
+- Estoque;
+- Publicação de ofertas;
+- Pedidos e cotações;
+- Comercialização;
+- Integração com Marketplace;
+- Integração com Fretes;
+- Rastreabilidade de origem;
+- Assistência técnica;
+- Capacitação;
+- Indicadores de produção;
+- Programas de fomento;
+- Informações sobre acesso a crédito por parceiros autorizados.
+
+### Telas
+
+1. Home Agro;
+2. Mercado do Produtor;
+3. Catálogo;
+4. Detalhe do Produto;
+5. Perfil do Produtor;
+6. Carrinho e Pedido;
+7. Logística;
+8. Minhas Vendas;
+9. Assistência Técnica;
+10. Indicadores.
+
+## MÓDULO 12 — CARTEIRA DIGITAL / MRT$ / RECOMPENSAS
+
+Identificador: `wallet-rewards`
+
+### Funcionalidades
+
+- Conta do usuário;
+- Saldos diferenciados;
+- Consulta de movimentações;
+- Histórico;
+- QR Code;
+- Pagamento por parceiros autorizados;
+- Transferências quando legalmente permitidas;
+- Recargas quando habilitadas;
+- Pagamentos de pedidos;
+- Pagamentos de fretes;
+- Pagamentos de passagens;
+- Pagamentos no FoodPlace;
+- Programa de pontos;
+- Cashback;
+- Cupons;
+- Campanhas;
+- Regras de fidelização;
+- Recompensas;
+- Benefícios municipais autorizados;
+- Painel financeiro;
+- Conciliação;
+- Estorno;
+- Administração de campanhas e recompensas.
+
+### Requisitos financeiros obrigatórios
+
+Tratar MRT$ como um conceito que precisa de enquadramento jurídico e operacional antes de funcionar como moeda, ativo, conta de pagamento ou crédito transferível.
+
+Implementar inicialmente três domínios separados:
+
+1. Pontos promocionais não monetários;
+2. Benefícios e créditos de finalidade restrita, sujeitos a regras específicas;
+3. Integração com instituição autorizada para pagamentos, quando formalizada.
+
+Nunca representar pontos promocionais como reais, depósitos bancários ou moeda legal.
+
+Não criar emissão monetária, custódia de recursos ou transferências financeiras reais sem desenho regulatório apropriado.
+
+### Telas
+
+1. Home Carteira;
+2. Saldo e Histórico;
+3. Pagar com QR Code;
+4. Receber;
+5. Transferir, quando habilitado;
+6. Recarga, quando habilitada;
+7. Pontos;
+8. Recompensas;
+9. Cupons;
+10. Segurança da Conta.
+
+## MÓDULO 13 — BIDUGA / MÓDULO PET
+
+Identificador: `biduga`
+
+### Funcionalidades
+
+- Cadastro de animais;
+- Perfil do pet;
+- Histórico de saúde;
+- Carteira de vacinação;
+- Lembretes;
+- Agendamento de clínicas;
+- Serviços veterinários;
+- Pet shops;
+- Banho e tosa;
+- Produtos pet;
+- Adoção responsável;
+- Animais perdidos e encontrados;
+- Mapa pet friendly;
+- Campanhas de vacinação;
+- Castração;
+- Denúncias;
+- Proteção animal;
+- Conteúdos educativos;
+- Integração com serviços municipais;
+- Gestão de parceiros;
+- Indicadores de bem-estar animal.
+
+### Telas
+
+1. Home Biduga;
+2. Meus Pets;
+3. Cadastro do Pet;
+4. Saúde e Vacinação;
+5. Agendamento;
+6. Serviços;
+7. Adoção;
+8. Perdidos e Encontrados;
+9. Mapa Pet;
+10. Campanhas e Denúncias.
+
+## MÓDULO 14 — BI, DADOS E INTELIGÊNCIA TERRITORIAL
+
+Identificador: `territorial-intelligence`
+
+### Funcionalidades
+
+- Dashboard municipal;
+- Indicadores de população;
+- Educação;
+- Saúde;
+- Economia;
+- Meio ambiente;
+- Transporte;
+- Turismo;
+- Agro;
+- Mapas temáticos;
+- Georreferenciamento;
+- Indicadores por bairro;
+- Indicadores por comunidade;
+- Séries históricas;
+- Filtros;
+- Relatórios;
+- Alertas;
+- Exportação autorizada;
+- Dados abertos;
+- Integração de bases;
+- Inteligência analítica;
+- Indicadores de desempenho;
+- Painéis comerciais;
+- Monitoramento de programas;
+- Suporte à decisão pública.
+
+### Telas
+
+1. Home BI;
+2. Painel Geral;
+3. Indicadores;
+4. Mapa Inteligente;
+5. Filtros Territoriais;
+6. Relatórios;
+7. Alertas;
+8. Dados Abertos;
+9. Gestão de Indicadores;
+10. Configurações.
+
+Separar rigorosamente dados individuais de informações agregadas.
+
+Aplicar controle de acesso, anonimização ou técnicas adicionais quando pertinentes, incluindo prevenção de reidentificação por pequenos grupos.
+
+## MÓDULO 15 — PUBLICIDADE E ANÚNCIOS
+
+Identificador: `advertising`
+
+### Funcionalidades
+
+- Cadastro de anunciantes;
+- Cadastro de anúncios;
+- Campanhas;
+- Banners;
+- Anúncios em listagens;
+- Destaques por categoria;
+- Anúncios em mapas;
+- Promoções;
+- Cupons;
+- Eventos;
+- Vagas de emprego;
+- Planos de mídia;
+- Assinaturas;
+- Orçamento publicitário;
+- Gestão de campanha;
+- Aprovação e moderação;
+- Relatórios;
+- Impressões;
+- Cliques;
+- Contatos;
+- Conversões atribuíveis;
+- Faturamento;
+- Painel do anunciante.
+
+### Telas
+
+1. Home Anúncios;
+2. Explorar;
+3. Detalhe do Anúncio;
+4. Criar Anúncio;
+5. Escolher Formato;
+6. Selecionar Plano;
+7. Pagamento;
+8. Minhas Campanhas;
+9. Resultados;
+10. Painel do Anunciante.
+
+Segmentação publicitária deve respeitar consentimentos aplicáveis, base legal, minimização e separação dos dados públicos e comerciais. Nunca usar dados clínicos, educacionais sensíveis ou informações protegidas para direcionamento comercial.
+
+# 8. PERFIS E PAINÉIS OPERACIONAIS
+
+Além do aplicativo do cidadão, implementar ambientes operacionais por perfil.
+
+Perfis:
+
+- Cidadão;
+- Responsável familiar;
+- Estudante;
+- Professor;
+- Gestor escolar;
+- Profissional de saúde autorizado;
+- Gestor de unidade de saúde;
+- Servidor municipal;
+- Gestor municipal;
+- Comerciante;
+- Restaurante;
+- Entregador;
+- Transportador;
+- Operador de passagens;
+- Prestador profissional;
+- Produtor rural;
+- Guia turístico;
+- Anunciante;
+- Parceiro institucional;
+- Administrador da empresa operadora;
+- Superadministrador técnico.
+
+Cada papel deverá possuir permissões granulares e apenas as telas necessárias.
+
+Criar painéis administrativos responsivos em uma aplicação web própria, compartilhando contratos de API, autenticação e Design System com o ecossistema.
+
+# 9. SISTEMA DE MONETIZAÇÃO DA EMPRESA OPERADORA
+
+Criar um módulo administrativo comercial denominado:
+
+**CIDADÃO$ BUSINESS ENGINE**
+
+Fontes de receita:
+
+1. Comissão sobre vendas no Marketplace;
+2. Comissão sobre pedidos no FoodPlace;
+3. Comissão sobre fretes contratados;
+4. Comissão sobre serviços profissionais;
+5. Comissão sobre reservas e experiências turísticas;
+6. Receita de publicidade;
+7. Assinaturas de lojistas;
+8. Assinaturas de restaurantes;
+9. Assinaturas de prestadores;
+10. Assinaturas de transportadores;
+11. Planos empresariais;
+12. Licenciamento de funcionalidades;
+13. Serviços de implantação e suporte;
+14. Relatórios comerciais agregados;
+15. Serviços financeiros e de conciliação, mediante contratos e autorizações cabíveis.
+
+Criar tabelas e serviços para:
+
+- commission_rules;
+- commercial_plans;
+- subscriptions;
+- platform_fees;
+- settlements;
+- seller_balances;
+- commission_events;
+- invoices;
+- refunds;
+- commercial_reports.
+
+As taxas de comissão deverão ser parametrizáveis por módulo, plano, campanha, município e contrato.
+
+Não codificar percentuais fixos como regras definitivas.
+
+Garantir que descontos, cancelamentos, estornos, reembolsos e repasses sejam corretamente refletidos no cálculo das comissões.
+
+# 10. ARQUITETURA DE DADOS
+
+Criar modelo relacional com migrations e chaves adequadas.
+
+Entidades iniciais por domínio:
+
+**Core**
+
+Tenant, Municipality, Organization, User, Profile, Role, Permission, AuditLog, Consent, Notification, Address, Attachment.
+
+**Identidade**
+
+Citizen, MPUID, IdentityVerification, FamilyRelationship, CitizenDocument, CitizenPreference.
+
+**Serviços Públicos**
+
+PublicService, ServiceRequest, Protocol, Appointment, Department, ServiceStatusHistory, ServiceDocument.
+
+**Educação**
+
+School, Student, Enrollment, Class, Attendance, Grade, SchoolCalendar, SchoolRoute, SchoolVehicle, SchoolPassenger.
+
+**Saúde**
+
+HealthUnit, PatientLink, Appointment, Referral, ExamRequest, VaccineRecord, MedicationRequest, CareEvent.
+
+**Comércio**
+
+Store, Seller, Product, ProductVariant, Inventory, Cart, CartItem, Order, OrderItem, Review, Coupon.
+
+**FoodPlace**
+
+Restaurant, Menu, MenuCategory, MenuItem, FoodOrder, FoodOrderItem, TableReservation, KitchenStatus.
+
+**Fretes**
+
+Transporter, Vehicle, Vessel, FreightRequest, FreightQuote, FreightBooking, Shipment, TrackingEvent, DeliveryProof.
+
+**Passagens**
+
+Operator, Route, Trip, Seat, SeatHold, Booking, Passenger, Ticket, BoardingValidation.
+
+**Serviços Profissionais**
+
+Professional, ProfessionalCategory, Portfolio, QuoteRequest, ServiceQuote, ServiceBooking, ServiceReview.
+
+**Turismo**
+
+Destination, Attraction, TouristRoute, Experience, TourBooking, RestaurantGuide, AmazonIngredient, RegionalDish, Recipe.
+
+**Agro**
+
+Producer, Cooperative, ProductiveUnit, AgriculturalProduct, Harvest, ProductionOffer, AgroOrder, TraceabilityEvent.
+
+**Carteira e Recompensas**
+
+WalletAccount, WalletEntry, PaymentIntent, PaymentTransaction, RewardAccount, RewardTransaction, RewardCampaign, BenefitGrant.
+
+**Biduga**
+
+Pet, PetVaccination, PetAppointment, PetAdoptionListing, LostFoundReport, PetServiceProvider, AnimalWelfareOccurrence.
+
+**BI**
+
+DataSource, Indicator, IndicatorValue, TerritorialUnit, GeoLayer, Dashboard, Report, DataImportJob.
+
+**Publicidade**
+
+Advertiser, Advertisement, AdvertisingCampaign, AdPlacement, ImpressionEvent, ClickEvent, AdvertisingPlan, AdInvoice.
+
+Cada entidade deverá ter:
+
+- Identificador apropriado;
+- Tenant ou escopo organizacional;
+- Campos de auditoria;
+- Validação;
+- Índices;
+- Constraints;
+- Relacionamentos;
+- Regras de acesso;
+- Política de retenção;
+- Regras de exclusão ou arquivamento;
+- Testes.
+
+# 11. MAPAS E INTELIGÊNCIA GEOGRÁFICA
+
+Criar componente de mapa reutilizável para:
+
+- Localizar escolas;
+- Localizar UBS;
+- Visualizar transportadores;
+- Visualizar restaurantes;
+- Visualizar profissionais;
+- Localizar pontos turísticos;
+- Visualizar rotas escolares;
+- Visualizar transporte fluvial;
+- Acompanhar entregas;
+- Exibir mapas territoriais de BI.
+
+Suportar:
+
+- Coordenadas;
+- Pontos de interesse;
+- Polilinhas;
+- Rotas;
+- Camadas;
+- Filtros;
+- Geofencing quando permitido;
+- Cache de mapas conforme licença do provedor;
+- Última posição conhecida;
+- Diferenciação entre rotas terrestres, fluviais e trechos combinados.
+
+**Não utilizar roteamento rodoviário para simular navegação fluvial.**
+
+Quando não houver motor de rotas fluviais ou dados reais disponíveis, apresentar percurso demonstrativo e identificá-lo claramente.
+
+# 12. ESTRATÉGIA OFFLINE-FIRST
+
+A conectividade amazônica exige operação resiliente.
+
+Implementar:
+
+1. Cache local;
+2. Persistência SQLite;
+3. Leitura offline dos dados previamente sincronizados;
+4. Fila de operações permitidas;
+5. Sincronização em segundo plano quando suportada;
+6. Controle de versões de registros;
+7. Estratégia de conflitos;
+8. Idempotência;
+9. Reenvio seguro;
+10. Estados visuais de sincronização.
+
+Não permitir que operações críticas — pagamento, emissão de bilhete, reserva definitiva de assento ou confirmação financeira — sejam consideradas concluídas apenas localmente.
+
+O aplicativo deverá diferenciar visualmente:
+
+- Informação sincronizada;
+- Informação em cache;
+- Operação pendente;
+- Operação confirmada pelo servidor;
+- Falha de sincronização;
+- Conexão indisponível.
+
+# 13. AUTENTICAÇÃO E SEGURANÇA
+
+Implementar:
+
+- Autenticação segura;
+- Recuperação de conta;
+- Tokens de acesso de curta duração;
+- Refresh tokens com rotação e revogação;
+- Armazenamento protegido;
+- RBAC/ABAC;
+- Sessões por dispositivo;
+- Logout global;
+- Verificação adicional para operações sensíveis;
+- Rate limiting;
+- Proteção contra abuso;
+- Auditoria;
+- Criptografia em trânsito;
+- Criptografia de dados sensíveis em repouso;
+- Política de senhas;
+- Controle de acesso por recurso;
+- Verificações de autorização no backend;
+- Proteções contra IDOR;
+- Gestão de segredos;
+- Validação de arquivos;
+- Política de retenção;
+- LGPD desde a concepção.
+
+CPF e documentos devem ser tratados como dados pessoais e minimizados em logs e interfaces.
+
+Dados de saúde e de crianças exigem controles específicos e revisão de conformidade antes da produção.
+
+# 14. NOTIFICAÇÕES E COMUNICAÇÃO
+
+Criar NotificationService compartilhado.
+
+Eventos:
+
+- Protocolo atualizado;
+- Consulta agendada;
+- Lembrete de vacina;
+- Comunicado escolar;
+- Novo boletim;
+- Transporte escolar;
+- Pedido confirmado;
+- Pedido preparado;
+- Entrega em andamento;
+- Cotação de frete;
+- Passagem emitida;
+- Embarque;
+- Novo serviço;
+- Mensagem recebida;
+- Cupom disponível;
+- Recompensa conquistada;
+- Alerta municipal.
+
+Permitir configuração de preferências e opt-in quando necessário.
+
+# 15. EXPERIÊNCIA DE DEMONSTRAÇÃO
+
+Preparar ambiente DEMO com dados fictícios.
+
+Município principal:
+
+Manacapuru — Amazonas.
+
+Criar registros demonstrativos coerentes para:
+
+- 1 município;
+- 5 bairros;
+- 5 comunidades ribeirinhas;
+- 5 escolas;
+- 3 unidades de saúde;
+- 15 lojas;
+- 10 restaurantes;
+- 20 profissionais;
+- 10 transportadores;
+- 5 operadores de passagens;
+- 10 produtores rurais;
+- 10 atrativos turísticos;
+- 10 campanhas de publicidade;
+- Animais e prestadores do Biduga;
+- Indicadores de BI;
+- Carteiras e recompensas de demonstração.
+
+Não utilizar dados pessoais reais.
+
+A base de demonstração deverá permitir navegar pelos fluxos de todos os módulos.
+
+# 16. ESTRUTURA DE REPOSITÓRIO
+
+Criar organização equivalente a:
+
+cidadao-superapp/
+
+apps/
+- mobile/
+- admin-web/
+- api/
+
+packages/
+- ui/
+- theme/
+- types/
+- validation/
+- api-client/
+- auth/
+- shared/
+- domain/
+- config/
+
+infrastructure/
+- docker/
+- database/
+- monitoring/
+- scripts/
+
+docs/
+- architecture/
+- requirements/
+- api/
+- screens/
+- security/
+- testing/
+- deployment/
+- modules/
+
+Cada módulo deverá ter estrutura interna organizada em:
+
+- components;
+- screens;
+- hooks;
+- services;
+- schemas;
+- types;
+- queries;
+- tests.
+
+Não criar arquivos gigantes que concentrem toda a lógica do sistema.
+
+# 17. ESTRATÉGIA DE IMPLEMENTAÇÃO
+
+Executar incrementalmente por entregáveis verificáveis.
+
+## Etapa 0 — Descoberta e planejamento
+
+1. Analisar o repositório existente;
+2. Identificar funcionalidades já implementadas;
+3. Revisar os arquivos de especificação anexados;
+4. Elaborar matriz de requisitos;
+5. Mapear dependências;
+6. Criar arquitetura;
+7. Produzir backlog;
+8. Definir critérios de aceite;
+9. Definir riscos técnicos;
+10. Criar plano de implementação.
+
+## Etapa 1 — Fundação
+
+Implementar:
+
+- Monorepo;
+- Expo;
+- Navegação;
+- Design System;
+- Backend;
+- Banco;
+- Autenticação;
+- Multi-tenant;
+- MPUID;
+- Perfis;
+- Notificações;
+- Cache offline;
+- API Client;
+- Observabilidade.
+
+## Etapa 2 — Núcleo comercial prioritário
+
+Entregar fluxos completos e integrados de:
+
+1. Marketplace;
+2. FoodPlace;
+3. Fretes.
+
+Desenvolver cadastro de operadores, publicação de produtos, pedidos, cotações, estados transacionais, checkout sandbox, comissões e painel comercial.
+
+## Etapa 3 — Serviços municipais
+
+Implementar:
+
+- Atendimento Público;
+- Educação;
+- Saúde.
+
+Priorizar integração de perfis, protocolos e controle de acesso.
+
+## Etapa 4 — Mobilidade e economia local
+
+Implementar:
+
+- Passagens;
+- Serviços Profissionais;
+- Turismo;
+- Agro.
+
+## Etapa 5 — Recursos transversais e expansão
+
+Implementar:
+
+- Carteira MRT$ e Recompensas;
+- Biduga;
+- BI Territorial;
+- Publicidade e Anúncios.
+
+A infraestrutura comum de pagamentos e recompensas pode ser antecipada quando necessária ao núcleo comercial.
+
+## Etapa 6 — Homologação e implantação
+
+- Testes;
+- Segurança;
+- Performance;
+- Usabilidade;
+- Acessibilidade;
+- Offline;
+- Integrações;
+- Piloto municipal;
+- Documentação;
+- Build Android/iOS;
+- Preparação de produção.
+
+# 18. CRITÉRIOS DE ACEITE
+
+Uma funcionalidade será considerada implementada somente se:
+
+1. Sua tela for navegável;
+2. Os formulários validarem entradas;
+3. Existirem estados de carregamento, erro, vazio e sucesso;
+4. Os dados forem persistidos;
+5. A API tiver contrato documentado;
+6. As permissões forem verificadas no backend;
+7. As consultas respeitarem o tenant;
+8. Existirem testes proporcionais ao risco;
+9. O fluxo puder ser executado no ambiente de demonstração;
+10. As integrações indisponíveis estiverem sinalizadas;
+11. O aplicativo não apresentar erros críticos de execução;
+12. Houver evidência de teste;
+13. O resultado estiver documentado.
+
+Nenhuma funcionalidade deve ser marcada como concluída se apenas a interface foi desenhada.
+
+# 19. TESTES
+
+Implementar testes:
+
+- Unitários;
+- Componentes;
+- Integração;
+- API;
+- Permissões;
+- Isolamento multi-tenant;
+- E2E;
+- Offline/sincronização;
+- Concorrência em reservas;
+- Idempotência;
+- Pagamentos sandbox;
+- Segurança;
+- Acessibilidade;
+- Performance.
+
+Testar especialmente:
+
+- Compras;
+- Agendamentos;
+- Emissão de passagens;
+- Cotações;
+- Cancelamentos;
+- Reembolsos;
+- Transações;
+- Dados pessoais;
+- Saúde;
+- Dados de menores;
+- Permissões administrativas.
+
+# 20. ENTREGÁVEIS OBRIGATÓRIOS
+
+Produzir:
+
+1. Código-fonte React Native/Expo;
+2. Código-fonte do backend;
+3. Aplicação administrativa;
+4. Design System;
+5. Scripts de banco de dados;
+6. Migrations;
+7. Seeds;
+8. Documentação da arquitetura;
+9. Matriz de requisitos;
+10. Contratos OpenAPI;
+11. Documentação dos 15 módulos;
+12. Fluxogramas;
+13. Modelo de dados;
+14. Guia de desenvolvimento;
+15. Guia de implantação;
+16. Guia de operação;
+17. Testes automatizados;
+18. Relatório de cobertura;
+19. Registro de limitações;
+20. Build Android de desenvolvimento;
+21. Configuração iOS;
+22. Relatório de validação do MVP;
+23. Checklist de segurança;
+24. Documentação de integrações externas;
+25. Manual da empresa operadora.
+
+# 21. REGRAS DE EXECUÇÃO PARA O AGENTE
+
+**Regra 1:** Preserve os nomes e propósitos dos 15 módulos.
+
+**Regra 2:** Priorize uma aplicação mobile React Native real, e não uma implementação exclusivamente web.
+
+**Regra 3:** Se o ambiente permitir apenas preview web, trate-o como prévia e mantenha o projeto Expo como artefato principal.
+
+**Regra 4:** Reutilize componentes e serviços, evitando duplicações.
+
+**Regra 5:** Não invente integrações oficiais ou credenciais de terceiros.
+
+**Regra 6:** Não represente dados fictícios como reais.
+
+**Regra 7:** Não declare pagamentos e transações como concluídos sem confirmação autorizada.
+
+**Regra 8:** Mantenha registros de progresso, arquivos alterados e testes executados.
+
+**Regra 9:** Execute comandos de instalação, análise, testes e build quando o ambiente disponibilizar essas ferramentas.
+
+**Regra 10:** Ao finalizar cada etapa, informe claramente: implementado, parcialmente implementado, demonstrativo e pendente de integração.
+
+**Regra 11:** Consulte primeiro os documentos e layouts anexados. Quando houver contradições, identifique a divergência e documente a decisão técnica em vez de alterá-la silenciosamente.
+
+**Regra 12:** Não adicionar módulos fora do escopo principal sem justificativa e registro.
+
+# 22. COMANDO DE INICIALIZAÇÃO
+
+Inicie o desenvolvimento do projeto **CIDADÃO$ SUPER APP**.
+
+Sua primeira sequência de execução deverá ser:
+
+1. Verificar o ambiente e identificar o repositório disponível.
+2. Analisar os arquivos e layouts de referência.
+3. Gerar a arquitetura completa.
+4. Criar a árvore de diretórios.
+5. Preparar o projeto Expo com TypeScript e Expo Router.
+6. Implementar o Design System CIDADÃO$.
+7. Criar a navegação principal com os 15 módulos.
+8. Criar autenticação, configuração de município e MPUID.
+9. Implementar as primeiras telas funcionais com dados demonstrativos.
+10. Preparar a API e a persistência.
+11. Executar verificações de TypeScript, lint e testes.
+12. Registrar os resultados e pendências.
+13. Prosseguir para os fluxos comerciais prioritários: Marketplace, FoodPlace e Fretes.
+
+**Resultado esperado da primeira execução:** um aplicativo React Native/Expo inicializável, com identidade CIDADÃO$, navegação funcional, os 15 módulos acessíveis, núcleo compartilhado estruturado e uma primeira jornada persistente concluída. Os demais fluxos deverão ser implementados em incrementos sucessivos, sem confundir telas demonstrativas com funcionalidades finalizadas.
+
+**Diretriz final:** Construir uma plataforma municipal integrada, escalável, segura, inclusiva e comercialmente sustentável, adequada à realidade da Amazônia e preparada para pesquisa aplicada, pilotos municipais e expansão nacional.

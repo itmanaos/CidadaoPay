@@ -1,0 +1,6 @@
+{
+  "name": "CIDADÃO$ — Super App Municipal e Bioeconomia",
+  "description": "Plataforma Inteligente de Transformação Digital, Bioeconomia e Governança Integrada para Municípios Amazônicos (Manacapuru/AM).",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
